@@ -1,11 +1,11 @@
-import { IsEmail, IsOptional, IsString, Length, length, Min } from "class-validator";
-import { IsNull } from "typeorm";
+import { IsEmail, IsOptional, IsString, Length } from "class-validator";
 
 enum ValidationErrorMessage {
     InvalidEmailFormat = "Invalid email format!",
-    InvalidNameLength = "Name length must be between 1 and 255 letters!",
-    InvalidUsernameLength = "Username length must be between 6 and 16 letters!",
-    InvalidPasswordLength = "Password length must be between 6 and 100 letters!",
+    InvalidNameLength = "Name must be between 1 and 255 letters!",
+    InvalidPhoneLength = "Phone must be between 6 and 15 digts!",
+    InvalidUsernameLength = "Username must be between 6 and 16 letters!",
+    InvalidPasswordLength = "Password must be between 6 and 100 letters!",
 }
 
 export class CreateUserDto {
@@ -38,7 +38,12 @@ export class CreateUserDto {
     @IsString()
     avatarPath: string
 
-    @IsOptional()
     @IsString()
-    bio: string
+    @Length(6, 15, {
+        message: ValidationErrorMessage.InvalidPasswordLength
+    })
+    phoneNumber: string
+
+    @IsString()
+    address: string
 }
