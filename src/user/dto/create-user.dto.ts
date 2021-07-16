@@ -1,5 +1,4 @@
-import { IsEmail, IsOptional, IsString, Length, length, Min } from "class-validator";
-import { IsNull } from "typeorm";
+import { IsEmail, IsOptional, IsString, Length } from "class-validator";
 
 enum ValidationErrorMessage {
     InvalidEmailFormat = "Invalid email format!",
