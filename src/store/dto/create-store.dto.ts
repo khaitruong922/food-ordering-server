@@ -24,10 +24,4 @@ export class CreateStoreDto {
         message : ValidationErrorMessage.InvalidAdressLength
     })
     address : string
-
-    @IsString()
-    @Length(0, 255, {
-        message : ValidationErrorMessage.InvalidAdressLength
-    })
-    sub_menus : string
 }

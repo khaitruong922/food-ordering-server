@@ -20,10 +20,4 @@ export class Store extends BaseEntity{
         length: 255
     })
     address : string
-
-    @Column({
-        type: 'varchar',
-        length: 255
-    })
-    sub_menus : string
 }
