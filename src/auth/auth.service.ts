@@ -4,6 +4,7 @@ import { User } from 'src/user/entities/user.entity';
 import { UserService } from 'src/user/user.service';
 import * as bcrypt from 'bcrypt'
 import LoginResponse from './login.reponse';
+import { JwtPayload } from './jwt.payload';
 
 @Injectable()
 export class AuthService {
@@ -18,8 +19,9 @@ export class AuthService {
         return user
     }
 
-    async login(user: User) {
-        const payload = { sub: user.id }
-        return new LoginResponse(this.jwtService.sign(payload))
+    async login(user: User): Promise<LoginResponse> {
+        const payload: JwtPayload = { sub: user.id, role: user.role }
+        const accessToken = await this.jwtService.sign(payload)
+        return { accessToken }
     }
 }
