@@ -1,5 +1,6 @@
 import { Exclude } from "class-transformer";
 import { BaseEntity } from "src/base/base.entity";
+import { Role } from "src/role/role.enum";
 import { Column, Entity } from "typeorm";
 
 @Entity('user')
@@ -49,4 +50,7 @@ export class User extends BaseEntity {
     })
     phoneNumber: string
 
+    @Exclude()
+    @Column({ enum: Role, default: Role.User })
+    role: Role
 }

@@ -1,5 +1,3 @@
-export default class LoginResponse {
-    constructor(public accessToken: string) {
-
-    }
+export default interface LoginResponse {
+    accessToken: string,
 }
