@@ -16,13 +16,14 @@ async function bootstrap() {
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
   app.use(cookieParser())
   app.useGlobalPipes(new ValidationPipe({
+    whitelist: true,
     transform: true,
     forbidUnknownValues: true,
   }))
 
   const config = new DocumentBuilder()
-    .setTitle('Food Ordering App API')
-    .setDescription('The API documentation for Food Ordering App')
+    .setTitle('DeliV API')
+    .setDescription('The API documentation for DeliV')
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);
