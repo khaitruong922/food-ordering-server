@@ -21,4 +21,10 @@ export class Order extends BaseEntity{
 
     @Column()
     status : OrderStatus
+
+    @Column()
+    totalPrice : number
+
+    @Column()
+    deliveredTime : Date
 }
