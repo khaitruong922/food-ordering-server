@@ -11,7 +11,4 @@ export class StoreService extends BaseService<Store, Repository<Store>>{
   constructor(@InjectRepository(Store) repository: Repository<Store>) {
     super(repository)
   }
-  async create(store: CreateStoreDto) {
-    return super.create(store)
-  }
 }
