@@ -4,8 +4,7 @@ import { Column, Entity } from "typeorm";
 @Entity('category')
 export class Category extends BaseEntity {
     @Column({
-        type: "varchar",
-        length: 20,
+        type: "text",
         unique: true
     })
     name: string

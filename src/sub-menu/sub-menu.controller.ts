@@ -3,7 +3,7 @@ import { SubMenuService } from './sub-menu.service';
 import { CreateSubMenuDto } from './dto/create-sub-menu.dto';
 import { UpdateSubMenuDto } from './dto/update-sub-menu.dto';
 
-@Controller('sub-menu')
+@Controller('sub-menus')
 export class SubMenuController {
   constructor(private readonly subMenuService: SubMenuService) {}
 
@@ -13,22 +13,22 @@ export class SubMenuController {
   }
 
   @Get()
-  findAll() {
-    return this.subMenuService.findAll();
+  getAll() {
+    return this.subMenuService.getAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.subMenuService.findOne(+id);
+  getOne(@Param('id') id: number) {
+    return this.subMenuService.getOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateSubMenuDto: UpdateSubMenuDto) {
-    return this.subMenuService.update(+id, updateSubMenuDto);
+  update(@Param('id') id: number, @Body() data: UpdateSubMenuDto) {
+    return this.subMenuService.update(id, data);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.subMenuService.remove(+id);
+  delete(@Param('id') id: number) {
+    return this.subMenuService.delete(+id);
   }
 }

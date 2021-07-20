@@ -14,7 +14,7 @@ export class Product extends BaseEntity {
 
     @Column({
         type: "varchar",
-        length: 16
+        length: 100
     })
     name: string
 
@@ -22,7 +22,7 @@ export class Product extends BaseEntity {
         type: "text"
     })
     @Optional()
-    description: string = "default description"
+    description: string
 
     @Column({
         type: "integer"

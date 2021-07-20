@@ -6,24 +6,22 @@ import { Column, Entity } from "typeorm";
 export class Store extends BaseEntity{
     @Column({
         type: 'varchar',
-        length: '255'
+        length: '100'
     })
     name : string
 
     @Column({
-        type: 'varchar',
-        length: 255
+        type: 'text',
     })
     description : string
 
     @Column({
-        type: 'varchar',
-        length: 255
+        type: 'text',
     })
     address : string
 
     @Column({
-        nullable: true
+        type: 'text',
     })
-    sub_menu : SubMenu
+    img : string
 }

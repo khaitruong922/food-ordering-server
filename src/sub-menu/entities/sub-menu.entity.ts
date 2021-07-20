@@ -5,7 +5,7 @@ import { Column, Entity } from "typeorm";
 export class SubMenu extends BaseEntity{
     @Column({
         type: "varchar",
-        length: 16
+        length: 100
     })
     name : string
 

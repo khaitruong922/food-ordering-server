@@ -1,25 +1,25 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsNegative, IsString, Length } from "class-validator";
+import { IsNegative, IsOptional, IsPositive, IsString, Length } from "class-validator";
 
 enum ValidationErrorMessage {
-    InvalidDescriptionLength = "Description length must be between 0 and 255 letters!",
-    InvalidName = "Name length can only be 16 letters!",
+    InvalidName = "Name length must be between 1 and 100 letters!",
     InvalidPrice = "Price can't be negative!",
-    InvalidQuantity = "Quantity can't be negative"
+    InvalidQuantity = "Quantity can't be negative!"
 }
 
 export class CreateProductDto {
     @ApiProperty()
+    @IsOptional()
     @IsString()
     img: string
 
     @ApiProperty()
-    @IsNegative({message: ValidationErrorMessage.InvalidPrice})
+    @IsNegative({ message: ValidationErrorMessage.InvalidPrice })
     price: number
 
     @ApiProperty()
     @IsString()
-    @Length(0,16,{message: ValidationErrorMessage.InvalidName})
+    @Length(0, 100, { message: ValidationErrorMessage.InvalidName })
     name: string
 
     @ApiProperty()
@@ -27,6 +27,6 @@ export class CreateProductDto {
     description: string
 
     @ApiProperty()
-    @IsNegative({message: ValidationErrorMessage.InvalidQuantity})
+    @IsPositive({ message: ValidationErrorMessage.InvalidQuantity })
     quantity: number
 }
