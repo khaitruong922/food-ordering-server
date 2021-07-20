@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDate, IsEnum, IsPositive, IsString, Length } from "class-validator";
+import { IsDate, IsEnum, IsOptional, IsPositive, IsString, Length } from "class-validator";
 import { OrderStatus } from "../entities/order.entity";
 
 enum ValidationErrorMessage {
@@ -22,11 +22,7 @@ export class CreateOrderDto {
     @ApiProperty()
     @IsString()
     note: string
-
-    @ApiProperty()
-    @IsEnum(OrderStatus, { message: ValidationErrorMessage.InvalidOrderStatus })
-    status: OrderStatus
-
+    
     @ApiProperty()
     @IsPositive({ message: ValidationErrorMessage.NegativePrice })
     totalPrice: number

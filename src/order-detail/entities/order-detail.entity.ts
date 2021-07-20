@@ -4,16 +4,9 @@ import { Column, Entity } from "typeorm";
 
 @Entity('order_detail')
 export class OrderDetail extends BaseEntity {
-    // @Column()
-    // product: Product
-
-    @Column({
-        type: "integer"
-    })
+    @Column()
     quantity: number
 
-    @Column({
-        type: "double",
-    })
+    @Column()
     price: number
 }

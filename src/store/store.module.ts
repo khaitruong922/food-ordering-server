@@ -12,4 +12,4 @@ import { Store } from './entities/store.entity';
   providers: [StoreService],
   exports: [StoreService]
 })
-export class StoreModule {}
+export class StoreModule { }

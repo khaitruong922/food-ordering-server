@@ -14,23 +14,19 @@ export enum OrderStatus {
 export class Order extends BaseEntity {
     @Column({
         type: "text",
-        length: 255
     })
     address: string
 
     @Column({
         type: "text",
-        length: 255
+        nullable: true,
     })
-    @Optional()
     note: string
 
-    @Column()
+    @Column({ enum: OrderStatus, default: OrderStatus.PENDING })
     status: OrderStatus
 
-    @Column({
-        type: "double",
-    })
+    @Column()
     totalPrice: number
 
     @Column()

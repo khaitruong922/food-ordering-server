@@ -4,12 +4,14 @@ import { Column, Entity } from "typeorm";
 
 @Entity('product')
 export class Product extends BaseEntity {
-    @Column()
+    @Column({
+        type: 'text',
+        nullable: true,
+        default: 'https://hieumobile.com/wp-content/uploads/avatar-among-us-9.jpg',
+    })
     img: string
 
-    @Column({
-        type: "double"
-    })
+    @Column()
     price: number
 
     @Column({
@@ -19,13 +21,11 @@ export class Product extends BaseEntity {
     name: string
 
     @Column({
-        type: "text"
+        type: "text",
+        nullable: true,
     })
-    @Optional()
     description: string
 
-    @Column({
-        type: "integer"
-    })
+    @Column()
     quantity: number
 }

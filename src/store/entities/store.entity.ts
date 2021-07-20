@@ -3,25 +3,28 @@ import { SubMenu } from "src/sub-menu/entities/sub-menu.entity";
 import { Column, Entity } from "typeorm";
 
 @Entity('store')
-export class Store extends BaseEntity{
+export class Store extends BaseEntity {
     @Column({
         type: 'varchar',
-        length: '100'
+        length: '100',
     })
-    name : string
+    name: string
+
+    @Column({
+        type: 'text',
+        nullable: true,
+    })
+    description: string
 
     @Column({
         type: 'text',
     })
-    description : string
+    address: string
 
     @Column({
         type: 'text',
+        nullable: true,
+        default: 'https://hieumobile.com/wp-content/uploads/avatar-among-us-9.jpg',
     })
-    address : string
-
-    @Column({
-        type: 'text',
-    })
-    img : string
+    img: string
 }
