@@ -1,3 +1,4 @@
+import { ApiProperty } from "@nestjs/swagger";
 import { IsString, Length } from "class-validator";
 
 enum ValidationErrorMessage {
@@ -7,21 +8,24 @@ enum ValidationErrorMessage {
 }
 
 export class CreateStoreDto {
+    @ApiProperty()
     @IsString()
     @Length(1, 255, {
         message: ValidationErrorMessage.InvalidNameLength
     })
-    name : string
+    name: string
 
+    @ApiProperty()
     @IsString()
     @Length(0, 255, {
-        message : ValidationErrorMessage.InvalidDescriptionLength
+        message: ValidationErrorMessage.InvalidDescriptionLength
     })
-    description : string
+    description: string
 
+    @ApiProperty()
     @IsString()
     @Length(0, 255, {
-        message : ValidationErrorMessage.InvalidAdressLength
+        message: ValidationErrorMessage.InvalidAdressLength
     })
-    address : string
+    address: string
 }

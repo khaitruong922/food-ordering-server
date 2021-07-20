@@ -2,7 +2,7 @@ import { Optional } from "@nestjs/common";
 import { BaseEntity } from "src/base/base.entity";
 import { Column, Entity } from "typeorm";
 
-export enum OrderStatus{
+export enum OrderStatus {
     PENDING = "PENDING",
     RECEIVED = "RECEIVED",
     PREPARING = "PREPARING",
@@ -11,20 +11,28 @@ export enum OrderStatus{
 }
 
 @Entity('order')
-export class Order extends BaseEntity{
-    @Column()
-    address : string
+export class Order extends BaseEntity {
+    @Column({
+        type: "text",
+        length: 255
+    })
+    address: string
 
-    @Column()
+    @Column({
+        type: "text",
+        length: 255
+    })
     @Optional()
-    note : string
+    note: string
 
     @Column()
-    status : OrderStatus
+    status: OrderStatus
+
+    @Column({
+        type: "double",
+    })
+    totalPrice: number
 
     @Column()
-    totalPrice : number
-
-    @Column()
-    deliveredTime : Date
+    deliveredTime: Date
 }

@@ -1,4 +1,5 @@
 import { BaseEntity } from "src/base/base.entity";
+import { SubMenu } from "src/sub-menu/entities/sub-menu.entity";
 import { Column, Entity } from "typeorm";
 
 @Entity('store')
@@ -20,4 +21,9 @@ export class Store extends BaseEntity{
         length: 255
     })
     address : string
+
+    @Column({
+        nullable: true
+    })
+    sub_menu : SubMenu
 }
