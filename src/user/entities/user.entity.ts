@@ -45,7 +45,6 @@ export class User extends BaseEntity {
     })
     phoneNumber: string
 
-    @Exclude()
     @Column({ enum: Role, default: Role.User })
     role: Role
 
