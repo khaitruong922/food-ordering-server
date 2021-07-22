@@ -1,6 +1,6 @@
-import { Optional } from "@nestjs/common";
 import { BaseEntity } from "src/base/base.entity";
-import { Column, Entity } from "typeorm";
+import { Category } from "src/category/entities/category.entity";
+import { Column, Entity, JoinTable, ManyToMany } from "typeorm";
 
 @Entity('product')
 export class Product extends BaseEntity {
@@ -28,4 +28,10 @@ export class Product extends BaseEntity {
 
     @Column()
     quantity: number
+
+    @ManyToMany(type => Category, category => category.products, {
+        cascade: true
+    })
+    @JoinTable()
+    categories: Category[]
 }

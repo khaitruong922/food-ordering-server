@@ -1,5 +1,6 @@
 import { BaseEntity } from "src/base/base.entity";
-import { Column, Entity } from "typeorm";
+import { Product } from "src/product/entities/product.entity";
+import { Column, Entity, JoinTable, ManyToMany, OneToMany } from "typeorm";
 
 @Entity('category')
 export class Category extends BaseEntity {
@@ -8,4 +9,8 @@ export class Category extends BaseEntity {
         unique: true
     })
     name: string
+
+    @ManyToMany(type => Product, product => product.categories,)
+    @JoinTable()
+    products: Product[];
 }
