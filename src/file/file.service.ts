@@ -29,4 +29,14 @@ export class FileService {
         await this.repository.save(newFile);
         return newFile;
     }
+
+    async deletePublicFile(fileId: number) {
+        const file = await this.repository.findOneOrFail({ id: fileId });
+        const s3 = new S3();
+        await s3.deleteObject({
+            Bucket: awsConfig.publicBucketName,
+            Key: file.key,
+        }).promise();
+        await this.repository.delete(fileId);
+    }
 }

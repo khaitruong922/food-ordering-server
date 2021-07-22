@@ -15,10 +15,23 @@ export class StoreService extends BaseService<Store, Repository<Store>>{
   ) {
     super(repository)
   }
+
   async addImage(storeId: number, imageBuffer: Buffer, filename: string) {
-    const image = await this.fileService.uploadPublicFile(imageBuffer, filename);
-    const store = await this.repository.findOneOrFail(storeId);
-    await this.repository.update(storeId, { image });
+    const store = await this.repository.findOneOrFail(storeId)
+    if (store.image) this.deleteImage(storeId)
+    const image = await this.fileService.uploadPublicFile(imageBuffer, filename)
+    await this.repository.update(storeId, { image })
     return image;
+  }
+
+  async deleteImage(storeId: number) {
+    const store = await this.repository.findOneOrFail(storeId)
+    const fileId = store.image?.id
+    if (fileId) {
+      await this.repository.update(storeId, {
+        image: undefined
+      });
+      await this.fileService.deletePublicFile(fileId)
+    }
   }
 }

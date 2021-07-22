@@ -1,12 +1,12 @@
-import { HttpStatus, Injectable } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
+import * as bcrypt from 'bcrypt';
 import { BaseService } from "src/base/base.service";
-import { Equal, ILike, Repository } from "typeorm";
+import { FileService } from "src/file/file.service";
+import { ILike, Repository } from "typeorm";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user-dto";
-import { User } from './entities/user.entity'
-import * as bcrypt from 'bcrypt'
-import { FileService } from "src/file/file.service";
+import { User } from './entities/user.entity';
 @Injectable()
 export class UserService extends BaseService<User, Repository<User>> {
     constructor(
@@ -43,9 +43,21 @@ export class UserService extends BaseService<User, Repository<User>> {
     }
 
     async addAvatar(userId: number, imageBuffer: Buffer, filename: string) {
-        const avatar = await this.fileService.uploadPublicFile(imageBuffer, filename);
         const user = await this.repository.findOneOrFail(userId);
+        if (user.avatar) this.deleteAvatar(userId)
+        const avatar = await this.fileService.uploadPublicFile(imageBuffer, filename);
         await this.repository.update(userId, { avatar });
         return avatar;
+    }
+
+    async deleteAvatar(userId: number) {
+        const user = await this.repository.findOneOrFail(userId);
+        const fileId = user.avatar?.id;
+        if (fileId) {
+            await this.repository.update(userId, {
+                avatar: undefined
+            });
+            await this.fileService.deletePublicFile(fileId)
+        }
     }
 }

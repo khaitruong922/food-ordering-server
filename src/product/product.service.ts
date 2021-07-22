@@ -13,10 +13,23 @@ export class ProductService extends BaseService<Product, Repository<Product>> {
   ) {
     super(repository)
   }
+
   async addImage(productId: number, imageBuffer: Buffer, filename: string) {
-    const image = await this.fileService.uploadPublicFile(imageBuffer, filename);
     const product = await this.repository.findOneOrFail(productId);
+    if (product.image) this.deleteImage(productId)
+    const image = await this.fileService.uploadPublicFile(imageBuffer, filename);
     await this.repository.update(productId, { image });
     return image;
+  }
+
+  async deleteImage(productId: number) {
+    const product = await this.repository.findOneOrFail(productId)
+    const fileId = product.image?.id
+    if (fileId) {
+      await this.repository.update(productId, {
+        image: undefined
+      });
+      await this.fileService.deletePublicFile(fileId)
+    }
   }
 }

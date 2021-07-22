@@ -30,5 +30,5 @@ export class Store extends BaseEntity {
             nullable: true
         }
     )
-    avatar?: PublicFile;
+    image?: PublicFile;
 }
