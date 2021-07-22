@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
-import { typeOrmConfig } from './orm.config';
+import { typeOrmConfig } from './config/orm.config';
 import { UserModule } from './user/user.module';
 import { StoreModule } from './store/store.module';
 import { SubMenuModule } from './sub-menu/sub-menu.module';

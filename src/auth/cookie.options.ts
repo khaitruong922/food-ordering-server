@@ -1,9 +1,9 @@
 import { CookieOptions } from "express";
-import { JwtConstants } from "./constants";
+import { jwtConfig } from "../config/jwt.config";
 
 export const cookieOptions: CookieOptions = {
     httpOnly: true,
     sameSite: 'none',
     secure: true,
-    maxAge: JwtConstants.ExpirationTime * 1000
+    maxAge: jwtConfig.expirationTime * 1000
 }
