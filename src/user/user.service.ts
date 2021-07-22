@@ -44,7 +44,7 @@ export class UserService extends BaseService<User, Repository<User>> {
 
     async addAvatar(userId: number, imageBuffer: Buffer, filename: string) {
         const user = await this.repository.findOneOrFail(userId);
-        if (user.avatar) this.deleteAvatar(userId)
+        if (user.avatar) await this.deleteAvatar(userId)
         const avatar = await this.fileService.uploadPublicFile(imageBuffer, filename);
         await this.repository.update(userId, { avatar });
         return avatar;

@@ -16,7 +16,7 @@ export class ProductService extends BaseService<Product, Repository<Product>> {
 
   async addImage(productId: number, imageBuffer: Buffer, filename: string) {
     const product = await this.repository.findOneOrFail(productId);
-    if (product.image) this.deleteImage(productId)
+    if (product.image) await this.deleteImage(productId)
     const image = await this.fileService.uploadPublicFile(imageBuffer, filename);
     await this.repository.update(productId, { image });
     return image;
