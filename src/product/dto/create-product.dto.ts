@@ -9,7 +9,7 @@ enum ValidationErrorMessage {
 
 export class CreateProductDto {
     @ApiProperty()
-    @IsNegative({ message: ValidationErrorMessage.InvalidPrice })
+    @IsPositive({ message: ValidationErrorMessage.InvalidPrice })
     price: number
 
     @ApiProperty()
