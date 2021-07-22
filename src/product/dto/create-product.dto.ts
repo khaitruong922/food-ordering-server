@@ -9,11 +9,6 @@ enum ValidationErrorMessage {
 
 export class CreateProductDto {
     @ApiProperty()
-    @IsOptional()
-    @IsString()
-    img: string
-
-    @ApiProperty()
     @IsNegative({ message: ValidationErrorMessage.InvalidPrice })
     price: number
 

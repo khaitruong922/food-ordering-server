@@ -40,11 +40,6 @@ export class CreateUserDto {
     password: string
 
     @ApiProperty()
-    @IsOptional()
-    @IsString()
-    avatarPath: string
-
-    @ApiProperty()
     @IsString()
     @Length(6, 15, {
         message: ValidationErrorMessage.InvalidPasswordLength

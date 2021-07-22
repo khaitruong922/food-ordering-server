@@ -1,4 +1,5 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Request, UseGuards } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Patch, Post, Req, Request, UploadedFile, UseGuards, UseInterceptors } from "@nestjs/common";
+import { FileInterceptor } from "@nestjs/platform-express";
 import { JwtAuthGuard } from "src/auth/jwt-auth.guard";
 import RequestWithUser from "src/auth/request-with-user";
 import { CreateUserDto } from "./dto/create-user.dto";
@@ -42,6 +43,13 @@ export class UserController {
     @Patch(":id")
     async update(@Param("id") id: number, @Body() updateUserDto: UpdateUserDto) {
         return this.userService.update(id, updateUserDto)
+    }
+
+    @Post('avatar')
+    @UseGuards(JwtAuthGuard)
+    @UseInterceptors(FileInterceptor('file'))
+    async addAvatar(@Req() req: RequestWithUser, @UploadedFile() file: Express.Multer.File) {
+        return this.userService.addAvatar(req.user.id, file.buffer, file.originalname);
     }
 
 }

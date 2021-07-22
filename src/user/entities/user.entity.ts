@@ -1,7 +1,8 @@
 import { Exclude } from "class-transformer";
 import { BaseEntity } from "src/base/base.entity";
+import { PublicFile } from "src/file/entities/public-file.entity";
 import { Role } from "src/role/role.enum";
-import { Column, Entity } from "typeorm";
+import { Column, Entity, JoinColumn, OneToOne } from "typeorm";
 
 @Entity('user')
 export class User extends BaseEntity {
@@ -32,12 +33,6 @@ export class User extends BaseEntity {
     })
     password: string
 
-    @Column({
-        type: 'text',
-        nullable: true,
-        default: 'https://hieumobile.com/wp-content/uploads/avatar-among-us-9.jpg'
-    })
-    avatarPath: string
 
     @Column({
         type: 'text',
@@ -53,4 +48,14 @@ export class User extends BaseEntity {
     @Exclude()
     @Column({ enum: Role, default: Role.User })
     role: Role
+
+    @JoinColumn()
+    @OneToOne(
+        () => PublicFile,
+        {
+            eager: true,
+            nullable: true
+        }
+    )
+    avatar?: PublicFile;
 }

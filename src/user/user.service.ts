@@ -6,9 +6,13 @@ import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user-dto";
 import { User } from './entities/user.entity'
 import * as bcrypt from 'bcrypt'
+import { FileService } from "src/file/file.service";
 @Injectable()
 export class UserService extends BaseService<User, Repository<User>> {
-    constructor(@InjectRepository(User) repository: Repository<User>) {
+    constructor(
+        @InjectRepository(User) repository: Repository<User>,
+        private readonly fileService: FileService,
+    ) {
         super(repository)
     }
 
@@ -36,5 +40,12 @@ export class UserService extends BaseService<User, Repository<User>> {
                 name: ILike(`%${searchQuery}%`)
             }]
         })
+    }
+
+    async addAvatar(userId: number, imageBuffer: Buffer, filename: string) {
+        const avatar = await this.fileService.uploadPublicFile(imageBuffer, filename);
+        const user = await this.repository.findOneOrFail(userId);
+        await this.repository.update(userId, { avatar });
+        return avatar;
     }
 }

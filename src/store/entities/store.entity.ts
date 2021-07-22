@@ -1,6 +1,7 @@
 import { BaseEntity } from "src/base/base.entity";
+import { PublicFile } from "src/file/entities/public-file.entity";
 import { SubMenu } from "src/sub-menu/entities/sub-menu.entity";
-import { Column, Entity } from "typeorm";
+import { Column, Entity, JoinColumn, OneToOne } from "typeorm";
 
 @Entity('store')
 export class Store extends BaseEntity {
@@ -21,10 +22,13 @@ export class Store extends BaseEntity {
     })
     address: string
 
-    @Column({
-        type: 'text',
-        nullable: true,
-        default: 'https://hieumobile.com/wp-content/uploads/avatar-among-us-9.jpg',
-    })
-    img: string
+    @JoinColumn()
+    @OneToOne(
+        () => PublicFile,
+        {
+            eager: true,
+            nullable: true
+        }
+    )
+    avatar?: PublicFile;
 }
