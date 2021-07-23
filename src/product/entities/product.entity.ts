@@ -29,7 +29,7 @@ export class Product extends BaseEntity {
     @Column()
     quantity: number
 
-    @ManyToMany(type => Category, category => category.products, {
+    @ManyToMany(type => Category, {
         cascade: true
     })
     @JoinTable()
