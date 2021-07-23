@@ -1,7 +1,7 @@
-import { Optional } from "@nestjs/common";
 import { BaseEntity } from "src/base/base.entity";
 import { PublicFile } from "src/file/entities/public-file.entity";
-import { Column, Entity, JoinColumn, OneToOne } from "typeorm";
+import { Category } from "src/category/entities/category.entity";
+import { Column, Entity, JoinTable, ManyToMany, JoinColumn, OneToOne } from "typeorm";
 
 @Entity('product')
 export class Product extends BaseEntity {
@@ -32,4 +32,10 @@ export class Product extends BaseEntity {
         }
     )
     image?: PublicFile;
+    
+    @ManyToMany(type => Category, {
+        cascade: true
+    })
+    @JoinTable()
+    categories: Category[]
 }
