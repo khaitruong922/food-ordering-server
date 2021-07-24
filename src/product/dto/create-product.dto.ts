@@ -14,7 +14,7 @@ export class CreateProductDto {
     img: string
 
     @ApiProperty()
-    @IsNegative({ message: ValidationErrorMessage.InvalidPrice })
+    @IsPositive({ message: ValidationErrorMessage.InvalidPrice })
     price: number
 
     @ApiProperty()
