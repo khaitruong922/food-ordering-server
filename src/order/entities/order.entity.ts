@@ -1,6 +1,8 @@
 import { Optional } from "@nestjs/common";
 import { BaseEntity } from "src/base/base.entity";
-import { Column, Entity } from "typeorm";
+import { OrderDetail } from "src/order-detail/entities/order-detail.entity";
+import { User } from "src/user/entities/user.entity";
+import { Column, Entity, ManyToOne, OneToMany } from "typeorm";
 
 export enum OrderStatus {
     PENDING = "PENDING",
@@ -31,4 +33,10 @@ export class Order extends BaseEntity {
 
     @Column()
     deliveredTime: Date
+
+    @OneToMany(() => OrderDetail, (orderDetail: OrderDetail) => orderDetail.order)
+    orderDetails: OrderDetail[]
+
+    @ManyToOne(() => User, (user: User) => user.orders)
+    user: User
 }

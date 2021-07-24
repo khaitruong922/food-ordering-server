@@ -1,7 +1,9 @@
 import { BaseEntity } from "src/base/base.entity";
 import { PublicFile } from "src/file/entities/public-file.entity";
 import { Category } from "src/category/entities/category.entity";
-import { Column, Entity, JoinTable, ManyToMany, JoinColumn, OneToOne } from "typeorm";
+import { Column, Entity, JoinTable, ManyToMany, JoinColumn, OneToOne, OneToMany, ManyToOne } from "typeorm";
+import { OrderDetail } from "src/order-detail/entities/order-detail.entity";
+import { SubMenu } from "src/sub-menu/entities/sub-menu.entity";
 
 @Entity('product')
 export class Product extends BaseEntity {
@@ -32,10 +34,10 @@ export class Product extends BaseEntity {
         }
     )
     image?: PublicFile;
-    
-    @ManyToMany(type => Category, {
-        cascade: true
-    })
-    @JoinTable()
-    categories: Category[]
+
+    @OneToMany(() => OrderDetail, (orderDetail: OrderDetail) => orderDetail.product)
+    orderDetails: OrderDetail[]
+
+    @ManyToOne(() => SubMenu, (subMenu: SubMenu) => subMenu.products)
+    subMenu: SubMenu
 }

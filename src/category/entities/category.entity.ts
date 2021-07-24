@@ -1,5 +1,6 @@
 import { BaseEntity } from "src/base/base.entity";
 import { Product } from "src/product/entities/product.entity";
+import { Store } from "src/store/entities/store.entity";
 import { Column, Entity, JoinTable, ManyToMany, OneToMany, Unique } from "typeorm";
 
 @Entity('category')
@@ -10,17 +11,7 @@ export class Category extends BaseEntity {
     })
     name: string
 
-    @ManyToMany(type => Product, {eager: true})
-    @JoinTable({
-        name: "category_products",
-        joinColumn: {
-            name: "category",
-            referencedColumnName:"id"
-        },
-        inverseJoinColumn: {
-            name: "product",
-            referencedColumnName:"id"
-        }
-    })
-    products: Product[];
+    @ManyToMany(() => Store, (store: Store) => store.categories)
+    @JoinTable()
+    stores: Store[];
 }

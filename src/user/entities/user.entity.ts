@@ -1,8 +1,9 @@
 import { Exclude } from "class-transformer";
 import { BaseEntity } from "src/base/base.entity";
 import { PublicFile } from "src/file/entities/public-file.entity";
+import { Order } from "src/order/entities/order.entity";
 import { Role } from "src/role/role.enum";
-import { Column, Entity, JoinColumn, OneToOne } from "typeorm";
+import { Column, Entity, JoinColumn, OneToMany, OneToOne } from "typeorm";
 
 @Entity('user')
 export class User extends BaseEntity {
@@ -57,4 +58,7 @@ export class User extends BaseEntity {
         }
     )
     avatar?: PublicFile;
+
+    @OneToMany(() => Order, (order: Order) => order.user)
+    orders: Order[]
 }

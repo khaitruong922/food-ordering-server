@@ -1,6 +1,7 @@
 import { BaseEntity } from "src/base/base.entity";
+import { Order } from "src/order/entities/order.entity";
 import { Product } from "src/product/entities/product.entity";
-import { Column, Entity } from "typeorm";
+import { Column, Entity, ManyToOne } from "typeorm";
 
 @Entity('order_detail')
 export class OrderDetail extends BaseEntity {
@@ -9,4 +10,11 @@ export class OrderDetail extends BaseEntity {
 
     @Column()
     price: number
+
+    @ManyToOne(() => Order, (order: Order) => order.orderDetails)
+    order: Order
+
+    @ManyToOne(() => Product, (product: Product) => product.orderDetails)
+    product: Product
+
 }
