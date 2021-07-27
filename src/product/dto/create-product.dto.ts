@@ -18,10 +18,7 @@ export class CreateProductDto {
     name: string
 
     @ApiProperty()
+    @IsOptional()
     @IsString()
     description: string
-
-    @ApiProperty()
-    @IsPositive({ message: ValidationErrorMessage.InvalidQuantity })
-    quantity: number
 }

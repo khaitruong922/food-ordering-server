@@ -19,11 +19,10 @@ export class Product extends BaseEntity {
     @Column({
         type: "text",
         nullable: true,
+        default: "",
     })
     description: string
 
-    @Column()
-    quantity: number
 
     @JoinColumn()
     @OneToOne(

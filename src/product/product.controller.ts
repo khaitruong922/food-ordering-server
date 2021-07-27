@@ -28,11 +28,15 @@ export class ProductController {
   }
 
   @Patch(':id')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Admin)
   update(@Param('id') id: number, @Body() data: UpdateProductDto) {
     return this.productService.update(id, data);
   }
 
   @Delete(':id')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Admin)
   delete(@Param('id') id: number) {
     return this.productService.delete(id);
   }

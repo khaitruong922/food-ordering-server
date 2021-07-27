@@ -11,6 +11,7 @@ import { FileModule } from 'src/file/file.module';
     FileModule
   ],
   controllers: [ProductController],
-  providers: [ProductService]
+  providers: [ProductService],
+  exports: [ProductService],
 })
 export class ProductModule { }

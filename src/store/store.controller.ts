@@ -7,6 +7,7 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { RolesGuard } from 'src/role/roles.guard';
 import { Roles } from 'src/role/roles.decorator';
 import { Role } from 'src/role/role.enum';
+import { CreateSubMenuDto } from 'src/sub-menu/dto/create-sub-menu.dto';
 
 @Controller('stores')
 export class StoreController {
@@ -45,5 +46,11 @@ export class StoreController {
     return this.storeService.addImage(id, file.buffer, file.originalname);
   }
 
+  @Post(':id/sub-menus')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Admin)
+  async addSubMenu(@Param('id') id: number, @Body() createSubMenuDto: CreateSubMenuDto) {
+    return this.storeService.addSubMenuToStore(id, createSubMenuDto)
+  }
 
 }
