@@ -13,7 +13,9 @@ describe('CategoryService', () => {
       {
         ...Category
       }
-    ))
+    )),
+    getOne: jest.fn().mockImplementation(id => Any ),
+    findOne: jest.fn().mockImplementation(id => Promise.resolve(id))
   }
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -33,14 +35,13 @@ describe('CategoryService', () => {
   });
 
   it('should create a new category and return that', async () => {
-    expect(await service.create(
+    service.create(
       {
-        name: 'food',
-      }))
+        name: 'food'
+      })
+    expect(await service.getOne(1))
       .toEqual(
         {
-          id: expect.any(Number),
-          stores: Any,
           name: 'food',
         })
   })
