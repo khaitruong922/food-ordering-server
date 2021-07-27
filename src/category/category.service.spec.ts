@@ -14,8 +14,8 @@ describe('CategoryService', () => {
         ...Category
       }
     )),
-    getOne: jest.fn().mockImplementation(id => Any ),
-    findOne: jest.fn().mockImplementation(id => Promise.resolve(id))
+    getAll: jest.fn().mockImplementation(data => Any),
+    find: jest.fn().mockImplementation(() => Promise.resolve())
   }
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -39,7 +39,7 @@ describe('CategoryService', () => {
       {
         name: 'food'
       })
-    expect(await service.getOne(1))
+    expect(await service.getAll())
       .toEqual(
         {
           name: 'food',
