@@ -15,4 +15,10 @@ describe('StoreService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
+
+  //test case: show all the sub menus, the price, the name, category, promotion products
+
+  it('should show all the info for a store', () => {
+    expect(service).toEqual("")
+  })
 });
