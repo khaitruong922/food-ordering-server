@@ -1,7 +1,7 @@
 import { Optional } from "@nestjs/common";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsString } from "class-validator";
-import { Product } from "src/product/entities/product.entity";
+import { Store } from "src/store/entities/store.entity";
 
 export class CreateCategoryDto {
     @ApiProperty()
@@ -10,5 +10,5 @@ export class CreateCategoryDto {
 
     @ApiProperty()
     @Optional()
-    products: Product[]
+    stores: Store[]
 }
