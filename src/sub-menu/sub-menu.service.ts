@@ -15,8 +15,12 @@ export class SubMenuService extends BaseService<SubMenu, Repository<SubMenu>>{
     super(repository)
   }
 
+  async getOne(id: number) {
+    return this.repository.findOne(id, { relations: ['store', 'products'] })
+  }
+
   async addProductToSubMenu(id: number, createProductDto: CreateProductDto) {
     const subMenu = await this.repository.findOneOrFail(id)
-    return this.productService.create({...createProductDto, subMenu})
+    return this.productService.create({ ...createProductDto, subMenu })
   }
 }
