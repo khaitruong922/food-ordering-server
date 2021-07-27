@@ -12,7 +12,9 @@ export class SubMenu extends BaseEntity {
     name: string
 
     @Column({
-        type: "text"
+        type: "text",
+        nullable: true,
+        default: "",
     })
     description: string
 

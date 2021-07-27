@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BaseService } from 'src/base/base.service';
 import { FileService } from 'src/file/file.service';
+import { CreateSubMenuDto } from 'src/sub-menu/dto/create-sub-menu.dto';
+import { SubMenuService } from 'src/sub-menu/sub-menu.service';
 import { Repository } from 'typeorm';
 import { CreateStoreDto } from './dto/create-store.dto';
 import { UpdateStoreDto } from './dto/update-store.dto';
@@ -11,9 +13,14 @@ import { Store } from './entities/store.entity';
 export class StoreService extends BaseService<Store, Repository<Store>>{
   constructor(
     @InjectRepository(Store) repository: Repository<Store>,
-    private readonly fileService: FileService
+    private readonly fileService: FileService,
+    private readonly subMenuService: SubMenuService,
   ) {
     super(repository)
+  }
+
+  async getOne(id: number) {
+    return this.repository.findOne(id, { relations: ['subMenus', 'subMenus.products'] })
   }
 
   async addImage(storeId: number, imageBuffer: Buffer, filename: string) {
@@ -33,5 +40,10 @@ export class StoreService extends BaseService<Store, Repository<Store>>{
       });
       await this.fileService.deletePublicFile(fileId)
     }
+  }
+
+  async addSubMenuToStore(storeId: number, createSubMenuDto: CreateSubMenuDto) {
+    const store = await this.repository.findOneOrFail(storeId)
+    return this.subMenuService.create({ ...createSubMenuDto, store })
   }
 }
