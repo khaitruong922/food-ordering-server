@@ -1,33 +1,30 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { Any } from 'typeorm';
+import { Any, Repository } from 'typeorm';
 import { CategoryService } from './category.service';
 import { Category } from './entities/category.entity';
 
+export class mockCategoryRepositoryFake {
+  public create(): void {}
+  public save(): void{}
+}
 
 describe('CategoryService', () => {
   let service: CategoryService;
-  const mockCategoryRepository = {
-    create: jest.fn().mockImplementation(dto => dto),
-    save: jest.fn().mockImplementation(category => Promise.resolve(
-      {
-        ...Category
-      }
-    )),
-    getAll: jest.fn().mockImplementation(data => Any),
-    find: jest.fn().mockImplementation(() => Promise.resolve())
-  }
+  let serviceRepository: Repository<Category>;
+ 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [CategoryService,
         {
           provide: getRepositoryToken(Category),
-          useValue: mockCategoryRepository,
+          useValue: mockCategoryRepositoryFake,
         },
       ],
     }).compile();
 
     service = module.get<CategoryService>(CategoryService);
+    serviceRepository = module.get(getRepositoryToken(Category))
   });
 
   it('should be defined', () => {
@@ -35,11 +32,11 @@ describe('CategoryService', () => {
   });
 
   it('should create a new category and return that', async () => {
-    service.create(
+    await service.create(
       {
         name: 'food'
       })
-    expect(await service.getAll())
+    expect(await service.getOne(1))
       .toEqual(
         {
           name: 'food',
