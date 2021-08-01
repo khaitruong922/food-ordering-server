@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsPositive } from "class-validator";
+import { IsOptional, IsPositive } from "class-validator";
+import { Product } from "src/product/entities/product.entity";
 
 enum ValidationErrorMessage {
     InvalidPrice = "Price can't be negative!",
@@ -12,6 +13,13 @@ export class CreateOrderDetailDto {
     quantity: number
 
     @ApiProperty()
-    @IsPositive({ message: ValidationErrorMessage.InvalidPrice })
+    productId: number
+
+    @ApiProperty()
+    @IsOptional()
+    product: Product
+
+    @ApiProperty()
+    @IsOptional()
     price: number
 }

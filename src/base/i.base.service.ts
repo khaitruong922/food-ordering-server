@@ -4,11 +4,13 @@ import { DeleteResult } from 'typeorm'
 export interface IBaseService<T> {
     getAll(): Promise<T[]>
 
-    getOne(id: EntityId): Promise<T | undefined>
+    getOne(id: number): Promise<T | undefined>
+
+    getOneOrFail(id: number): Promise<T>
 
     create(data: any): Promise<T>
 
-    update(id: EntityId, data: any): Promise<T | undefined>
+    update(id: number, data: any): Promise<T | undefined>
 
-    delete(id: EntityId): Promise<DeleteResult>
+    delete(id: number): Promise<DeleteResult>
 }

@@ -11,7 +11,7 @@ export class OrderDetail extends BaseEntity {
     @Column()
     price: number
 
-    @ManyToOne(() => Order, (order: Order) => order.orderDetails)
+    @ManyToOne(() => Order, (order: Order) => order.orderDetails, { onDelete: 'CASCADE' })
     order: Order
 
     @ManyToOne(() => Product, (product: Product) => product.orderDetails)

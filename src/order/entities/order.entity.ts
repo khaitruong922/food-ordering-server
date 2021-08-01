@@ -31,10 +31,10 @@ export class Order extends BaseEntity {
     @Column()
     totalPrice: number
 
-    @Column()
-    deliveredTime: Date
+    @Column({ type: 'date' })
+    deliveredAt: Date
 
-    @OneToMany(() => OrderDetail, (orderDetail: OrderDetail) => orderDetail.order)
+    @OneToMany(() => OrderDetail, (orderDetail: OrderDetail) => orderDetail.order, { cascade: true })
     orderDetails: OrderDetail[]
 
     @ManyToOne(() => User, (user: User) => user.orders)

@@ -4,6 +4,8 @@ import { Category } from "src/category/entities/category.entity";
 import { Column, Entity, JoinTable, ManyToMany, JoinColumn, OneToOne, OneToMany, ManyToOne } from "typeorm";
 import { OrderDetail } from "src/order-detail/entities/order-detail.entity";
 import { SubMenu } from "src/sub-menu/entities/sub-menu.entity";
+import { Expose } from "class-transformer";
+import { Store } from "src/store/entities/store.entity";
 
 @Entity('product')
 export class Product extends BaseEntity {

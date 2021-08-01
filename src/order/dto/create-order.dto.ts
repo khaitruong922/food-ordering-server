@@ -1,5 +1,8 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsDate, IsEnum, IsOptional, IsPositive, IsString, Length } from "class-validator";
+import { Type } from "class-transformer";
+import { IsArray, IsDate, IsEnum, IsOptional, IsPositive, IsString, Length, ValidateNested } from "class-validator";
+import { CreateOrderDetailDto } from "src/order-detail/dto/create-order-detail.dto";
+import { User } from "src/user/entities/user.entity";
 import { OrderStatus } from "../entities/order.entity";
 
 enum ValidationErrorMessage {
@@ -21,13 +24,25 @@ export class CreateOrderDto {
 
     @ApiProperty()
     @IsString()
+    @IsOptional()
     note: string
-    
-    @ApiProperty()
-    @IsPositive({ message: ValidationErrorMessage.NegativePrice })
-    totalPrice: number
 
     @ApiProperty()
     @IsDate()
-    DeliveredTime: Date
+    @Type(() => Date)
+    deliveredAt: Date
+
+    @ApiProperty()
+    @IsArray()
+    @ValidateNested({ each: true })
+    @Type(() => CreateOrderDetailDto)
+    orderDetails: CreateOrderDetailDto[]
+
+    @ApiProperty()
+    @IsOptional()
+    user: User
+
+    @ApiProperty()
+    @IsOptional()
+    totalPrice: number
 }
