@@ -39,6 +39,7 @@
     "class-validator": "^0.13.1",
     "cookie-parser": "^1.4.5",
     "dotenv": "^10.0.0",
+    "jest-when": "^3.3.1",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
@@ -53,11 +54,12 @@
   "devDependencies": {
     "@nestjs/cli": "^7.6.0",
     "@nestjs/schematics": "^7.3.0",
-    "@nestjs/testing": "^7.6.15",
+    "@nestjs/testing": "^7.6.18",
     "@types/bcrypt": "^5.0.0",
     "@types/cookie-parser": "^1.4.2",
     "@types/express": "^4.17.12",
     "@types/jest": "^26.0.22",
+    "@types/jest-when": "^2.7.3",
     "@types/multer": "^1.4.7",
     "@types/node": "^14.14.36",
     "@types/passport-jwt": "^3.0.5",
@@ -84,7 +86,9 @@
       "ts"
     ],
     "rootDir": "./",
-    "modulePaths":["<rootDir>"],
+    "modulePaths": [
+      "<rootDir>"
+    ],
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"

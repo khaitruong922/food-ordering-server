@@ -11,13 +11,6 @@ export class SubMenu extends BaseEntity {
     })
     name: string
 
-    @Column({
-        type: "text",
-        nullable: true,
-        default: "",
-    })
-    description: string
-
     @ManyToOne(() => Store, (store: Store) => store.subMenus, { onDelete: 'CASCADE' })
     store: Store
 

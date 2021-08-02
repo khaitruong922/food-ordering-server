@@ -11,8 +11,4 @@ export class CreateSubMenuDto {
     @Length(0, 100, { message: ValidationErrorMessage.InvalidName })
     name: string
 
-    @ApiProperty()
-    @IsString()
-    @IsOptional()
-    description: string
 }

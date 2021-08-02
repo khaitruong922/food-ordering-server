@@ -23,9 +23,9 @@ export class UserController {
         return this.userService.getOne(req.user.id)
     }
 
-    @Get(":username")
-    async getOne(@Param("username") username: string) {
-        return this.userService.getOneByUsername(username)
+    @Get(":id")
+    async getOne(@Param("id") id: number) {
+        return this.userService.getOne(id)
     }
 
     @Post()
