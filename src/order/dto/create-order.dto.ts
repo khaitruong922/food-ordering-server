@@ -6,20 +6,23 @@ import { User } from "src/user/entities/user.entity";
 import { OrderStatus } from "../entities/order.entity";
 
 enum ValidationErrorMessage {
-    InvalidOrderStatus = "Invalid status!",
-    InvalidDescriptionLength = "Description length must be between 0 and 255 letters!",
-    InvalidAdressLength = "Address length must be between 0 and 255 letters!",
-    NegativePrice = "Price can't be negative!"
+    InvalidPhoneLength = "Phone length must be between 6 and 15 digits!",
 }
 
 export class CreateOrderDto {
     @ApiProperty()
     @IsString()
-    @Length(
-        0, 255, {
-        message: ValidationErrorMessage.InvalidAdressLength
-    }
-    )
+    name: string
+
+    @ApiProperty()
+    @IsString()
+    @Length(6, 15, {
+        message: ValidationErrorMessage.InvalidPhoneLength
+    })
+    phoneNumber: string
+
+    @ApiProperty()
+    @IsString()
     address: string
 
     @ApiProperty()

@@ -8,7 +8,7 @@ export class OrderDetail extends BaseEntity {
     @Column()
     quantity: number
 
-    @Column()
+    @Column({ type: 'real' })
     price: number
 
     @ManyToOne(() => Order, (order: Order) => order.orderDetails, { onDelete: 'CASCADE' })

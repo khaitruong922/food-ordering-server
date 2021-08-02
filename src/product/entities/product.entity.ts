@@ -9,7 +9,7 @@ import { Store } from "src/store/entities/store.entity";
 
 @Entity('product')
 export class Product extends BaseEntity {
-    @Column()
+    @Column({ type: 'real' })
     price: number
 
     @Column({

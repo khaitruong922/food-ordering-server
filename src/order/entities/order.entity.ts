@@ -16,11 +16,23 @@ export enum OrderStatus {
 export class Order extends BaseEntity {
     @Column({
         type: "text",
+        default: '',
+    })
+    name: string
+    @Column({
+        type: "text",
+        default: '',
     })
     address: string
+    @Column({
+        type: "text",
+        default: '',
+    })
+    phoneNumber: string
 
     @Column({
         type: "text",
+        default: '',
         nullable: true,
     })
     note: string
@@ -28,7 +40,7 @@ export class Order extends BaseEntity {
     @Column({ enum: OrderStatus, default: OrderStatus.PENDING })
     status: OrderStatus
 
-    @Column()
+    @Column({ type: 'real' })
     totalPrice: number
 
     @Column({ type: 'date' })
