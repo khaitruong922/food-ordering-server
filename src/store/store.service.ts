@@ -46,4 +46,11 @@ export class StoreService extends BaseService<Store, Repository<Store>>{
     const store = await this.repository.findOneOrFail(storeId)
     return this.subMenuService.create({ ...createSubMenuDto, store })
   }
+
+  async delete(id: number) {
+    const store = await this.repository.findOneOrFail(id)
+    const fileId = store.image?.id
+    if (fileId) this.fileService.deletePublicFile(fileId)
+    return super.delete(id)
+  }
 }

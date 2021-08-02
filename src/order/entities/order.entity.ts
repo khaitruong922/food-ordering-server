@@ -49,6 +49,6 @@ export class Order extends BaseEntity {
     @OneToMany(() => OrderDetail, (orderDetail: OrderDetail) => orderDetail.order, { cascade: true })
     orderDetails: OrderDetail[]
 
-    @ManyToOne(() => User, (user: User) => user.orders)
+    @ManyToOne(() => User, (user: User) => user.orders, { onDelete: 'SET NULL', nullable: true })
     user: User
 }
