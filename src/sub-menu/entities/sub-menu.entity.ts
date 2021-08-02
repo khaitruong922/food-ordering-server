@@ -18,7 +18,7 @@ export class SubMenu extends BaseEntity {
     })
     description: string
 
-    @ManyToOne(() => Store, (store: Store) => store.subMenus)
+    @ManyToOne(() => Store, (store: Store) => store.subMenus, { onDelete: 'CASCADE' })
     store: Store
 
     @OneToMany(() => Product, (product: Product) => product.subMenu)

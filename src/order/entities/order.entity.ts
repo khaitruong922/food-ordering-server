@@ -16,11 +16,23 @@ export enum OrderStatus {
 export class Order extends BaseEntity {
     @Column({
         type: "text",
+        default: '',
+    })
+    name: string
+    @Column({
+        type: "text",
+        default: '',
     })
     address: string
+    @Column({
+        type: "text",
+        default: '',
+    })
+    phoneNumber: string
 
     @Column({
         type: "text",
+        default: '',
         nullable: true,
     })
     note: string
@@ -28,15 +40,15 @@ export class Order extends BaseEntity {
     @Column({ enum: OrderStatus, default: OrderStatus.PENDING })
     status: OrderStatus
 
-    @Column()
+    @Column({ type: 'real' })
     totalPrice: number
 
-    @Column()
-    deliveredTime: Date
+    @Column({ type: 'date' })
+    deliveredAt: Date
 
-    @OneToMany(() => OrderDetail, (orderDetail: OrderDetail) => orderDetail.order)
+    @OneToMany(() => OrderDetail, (orderDetail: OrderDetail) => orderDetail.order, { cascade: true })
     orderDetails: OrderDetail[]
 
-    @ManyToOne(() => User, (user: User) => user.orders)
+    @ManyToOne(() => User, (user: User) => user.orders, { onDelete: 'SET NULL', nullable: true })
     user: User
 }

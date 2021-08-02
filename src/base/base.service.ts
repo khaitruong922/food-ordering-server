@@ -9,6 +9,9 @@ export class BaseService<T extends BaseEntity, R extends Repository<T>> implemen
     constructor(repository: R) {
         this.repository = repository
     }
+    async getOneOrFail(id: number): Promise<T> {
+        return this.repository.findOneOrFail(id)
+    }
 
     async getAll() {
         return this.repository.find()

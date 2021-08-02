@@ -42,7 +42,7 @@ export class CreateUserDto {
     @ApiProperty()
     @IsString()
     @Length(6, 15, {
-        message: ValidationErrorMessage.InvalidPasswordLength
+        message: ValidationErrorMessage.InvalidPhoneLength
     })
     phoneNumber: string
 

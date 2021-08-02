@@ -1,4 +1,7 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Req, UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import RequestWithUser from 'src/auth/request-with-user';
+import { User } from 'src/user/entities/user.entity';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { OrderService } from './order.service';
@@ -8,7 +11,9 @@ export class OrderController {
   constructor(private readonly orderService: OrderService) { }
 
   @Post()
-  create(@Body() data: CreateOrderDto) {
+  @UseGuards(JwtAuthGuard)
+  create(@Body() data: CreateOrderDto, @Req() req: RequestWithUser) {
+    data.user = req.user.id as unknown as User
     return this.orderService.create(data);
   }
 

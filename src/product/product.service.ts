@@ -32,4 +32,10 @@ export class ProductService extends BaseService<Product, Repository<Product>> {
       await this.fileService.deletePublicFile(fileId)
     }
   }
+  async delete(id: number) {
+    const product = await this.repository.findOneOrFail(id)
+    const fileId = product.image?.id
+    if (fileId) this.fileService.deletePublicFile(fileId)
+    return super.delete(id)
+  }
 }

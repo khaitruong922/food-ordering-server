@@ -60,4 +60,10 @@ export class UserService extends BaseService<User, Repository<User>> {
             await this.fileService.deletePublicFile(fileId)
         }
     }
+    async delete(id: number) {
+        const user = await this.repository.findOneOrFail(id)
+        const fileId = user.avatar?.id
+        if (fileId) this.fileService.deletePublicFile(fileId)
+        return super.delete(id)
+    }
 }
