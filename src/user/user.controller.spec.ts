@@ -1,13 +1,7 @@
-import { HttpException, HttpStatus } from "@nestjs/common"
 import { Test, TestingModule } from "@nestjs/testing"
-import { getRepositoryToken } from "@nestjs/typeorm"
 import { when } from "jest-when"
-import { PublicFile } from "src/file/entities/public-file.entity"
-import { FileService } from "src/file/file.service"
 import { mockService } from "src/util/mocks/mock.service"
-import { Any } from "typeorm"
 import { CreateUserDto } from "./dto/create-user.dto"
-import { User } from "./entities/user.entity"
 import { UserController } from "./user.controller"
 import { UserService } from "./user.service"
 
