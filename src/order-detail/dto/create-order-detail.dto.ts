@@ -13,13 +13,10 @@ export class CreateOrderDetailDto {
     quantity: number
 
     @ApiProperty()
-    productId: number
+    @IsOptional()
+    product?: Product
 
     @ApiProperty()
     @IsOptional()
-    product: Product
-
-    @ApiProperty()
-    @IsOptional()
-    price: number
+    price?: number
 }

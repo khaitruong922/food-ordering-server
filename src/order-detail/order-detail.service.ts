@@ -14,10 +14,4 @@ export class OrderDetailService extends BaseService<OrderDetail, Repository<Orde
   ) {
     super(repository)
   }
-
-  async create(data: CreateOrderDetailDto) {
-    const product = await this.productSerivce.getOneOrFail(data.productId)
-    data.price = product.price * data.quantity
-    return this.repository.save({ ...data, product })
-  }
 }

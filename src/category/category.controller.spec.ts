@@ -7,8 +7,7 @@ import { CategoryService } from "./category.service"
 
 describe('CategoryController', () => {
     const dto: CreateCategoryDto = {
-        name: 'test category',
-        stores: []
+        name: 'A category',
     }
 
     let mockCategoryService: typeof mockService
@@ -40,7 +39,7 @@ describe('CategoryController', () => {
             fail(e)
         }
     })
-    it('should return all categorys', async () => {
+    it('should return all categories', async () => {
         try {
             const categorys = [{ ...dto, id: 1 }, { ...dto, id: 2 }]
             mockCategoryService.getAll.mockResolvedValue(categorys)

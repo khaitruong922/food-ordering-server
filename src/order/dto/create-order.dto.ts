@@ -28,7 +28,7 @@ export class CreateOrderDto {
     @ApiProperty()
     @IsString()
     @IsOptional()
-    note: string
+    note?: string
 
     @ApiProperty()
     @IsDate()
@@ -43,9 +43,9 @@ export class CreateOrderDto {
 
     @ApiProperty()
     @IsOptional()
-    user: User
+    user?: User
 
     @ApiProperty()
     @IsOptional()
-    totalPrice: number
+    totalPrice?: number
 }

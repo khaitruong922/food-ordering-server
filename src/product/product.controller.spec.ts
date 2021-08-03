@@ -7,8 +7,8 @@ import { ProductService } from "./product.service"
 
 describe('ProductController', () => {
     const dto: CreateProductDto = {
-        name: 'Test Product',
-        description:' this is a testing description',
+        name: 'A Product',
+        description: 'A description',
         price: 100
     }
 

@@ -7,9 +7,9 @@ import { StoreService } from "./store.service"
 
 describe('StoreController', () => {
     const dto: CreateStoreDto = {
-        name: 'Test Store',
-        address: 'Address',
-        description: 'this is a testing description'
+        name: 'A Store',
+        address: 'An address',
+        description: 'A description'
     }
 
     let mockStoreService: typeof mockService

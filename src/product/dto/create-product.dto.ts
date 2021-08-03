@@ -20,5 +20,5 @@ export class CreateProductDto {
     @ApiProperty()
     @IsOptional()
     @IsString()
-    description: string
+    description?: string
 }

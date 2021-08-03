@@ -1,14 +1,13 @@
 import { Test, TestingModule } from "@nestjs/testing"
 import { when } from "jest-when"
 import { mockService } from "src/util/mocks/mock.service"
-import { Any } from "typeorm"
 import { CreateOrderDetailDto } from "./dto/create-order-detail.dto"
 import { OrderDetailController } from "./order-detail.controller"
 import { OrderDetailService } from "./order-detail.service"
 
 describe('OrderDetailController', () => {
-    const dto: any = {
-
+    const dto: CreateOrderDetailDto = {
+        quantity: 5,
     }
 
     let mockOrderDetailService: typeof mockService

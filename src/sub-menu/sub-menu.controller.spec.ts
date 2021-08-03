@@ -7,7 +7,7 @@ import { SubMenuService } from "./sub-menu.service"
 
 describe('SubMenuController', () => {
     const dto: CreateSubMenuDto = {
-        name: 'BBQ'
+        name: 'A sub-menu'
     }
 
     let mockSubMenuService: typeof mockService
