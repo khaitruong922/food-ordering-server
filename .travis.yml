@@ -7,7 +7,7 @@ script:
   - echo 'Installing dependencies...'
   - npm install
   - echo 'Creating a build...'
-  - npm build
+  - npm run build
   - echo 'Running tests...'
   - npm test
   - echo 'Completed!'
