@@ -19,6 +19,10 @@ export class StoreService extends BaseService<Store, Repository<Store>>{
     super(repository)
   }
 
+  async getAll() {
+    return this.repository.find({ relations: ['categories'] })
+  }
+
   async getOne(id: number) {
     return this.repository.findOne(id, { relations: ['subMenus', 'subMenus.products'] })
   }

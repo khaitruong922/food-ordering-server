@@ -39,6 +39,6 @@ export class Product extends BaseEntity {
     @OneToMany(() => OrderDetail, (orderDetail: OrderDetail) => orderDetail.product)
     orderDetails: OrderDetail[]
 
-    @ManyToOne(() => SubMenu, (subMenu: SubMenu) => subMenu.products)
+    @ManyToOne(() => SubMenu, (subMenu: SubMenu) => subMenu.products, { onDelete: 'CASCADE', })
     subMenu: SubMenu
 }
