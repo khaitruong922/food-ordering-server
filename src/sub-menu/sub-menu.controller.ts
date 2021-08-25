@@ -12,11 +12,6 @@ import { CreateProductDto } from 'src/product/dto/create-product.dto';
 export class SubMenuController {
   constructor(private readonly subMenuService: SubMenuService) { }
 
-  @Post()
-  create(@Body() createSubMenuDto: CreateSubMenuDto) {
-    return this.subMenuService.create(createSubMenuDto);
-  }
-
   @Get()
   getAll() {
     return this.subMenuService.getAll();
@@ -27,11 +22,22 @@ export class SubMenuController {
     return this.subMenuService.getOne(id);
   }
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Admin)
+  @Post()
+  create(@Body() createSubMenuDto: CreateSubMenuDto) {
+    return this.subMenuService.create(createSubMenuDto);
+  }
+
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Admin)
   @Patch(':id')
   update(@Param('id') id: number, @Body() data: UpdateSubMenuDto) {
     return this.subMenuService.update(id, data);
   }
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Admin)
   @Delete(':id')
   delete(@Param('id') id: number) {
     return this.subMenuService.delete(id);

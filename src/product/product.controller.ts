@@ -12,11 +12,6 @@ import { RolesGuard } from 'src/role/roles.guard';
 export class ProductController {
   constructor(private readonly productService: ProductService) { }
 
-  @Post()
-  create(@Body() data: CreateProductDto) {
-    return this.productService.create(data);
-  }
-
   @Get()
   getAll() {
     return this.productService.getAll();
@@ -25,6 +20,14 @@ export class ProductController {
   @Get(':id')
   getOne(@Param('id') id: number) {
     return this.productService.getOne(id);
+  }
+
+
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Admin)
+  @Post()
+  create(@Body() data: CreateProductDto) {
+    return this.productService.create(data);
   }
 
   @Patch(':id')

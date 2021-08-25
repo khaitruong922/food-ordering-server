@@ -13,10 +13,6 @@ import { CreateSubMenuDto } from 'src/sub-menu/dto/create-sub-menu.dto';
 export class StoreController {
   constructor(private readonly storeService: StoreService) { }
 
-  @Post()
-  create(@Body() data: CreateStoreDto) {
-    return this.storeService.create(data);
-  }
 
   @Get()
   getAll() {
@@ -28,11 +24,22 @@ export class StoreController {
     return this.storeService.getOne(id);
   }
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Admin)
+  @Post()
+  create(@Body() data: CreateStoreDto) {
+    return this.storeService.create(data);
+  }
+
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Admin)
   @Patch(':id')
   update(@Param('id') id: number, @Body() data: UpdateStoreDto) {
     return this.storeService.update(id, data);
   }
 
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.Admin)
   @Delete(':id')
   delete(@Param('id') id: number) {
     return this.storeService.delete(id);

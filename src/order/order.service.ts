@@ -18,9 +18,11 @@ export class OrderService extends BaseService<Order, Repository<Order>> {
   }
 
   async getAll() {
-    return this.repository.find({ relations: ['orderDetails', 'orderDetails.product','user'] })
+    return this.repository.find({ relations: ['orderDetails', 'orderDetails.product', 'user'] })
   }
-
+  async getAllOfUser(userId: number) {
+    return this.repository.find({ relations: ['orderDetails', 'orderDetails.product'], where: { user: userId } })
+  }
   async create(order: CreateOrderDto) {
     const user = await this.userService.getOneOrFail(order.user as unknown as number)
     const { orderDetails } = order
