@@ -24,8 +24,13 @@ export class UserController {
     @Get("/me")
     @UseGuards(JwtAuthGuard)
     async getCurrentUser(@Request() req: RequestWithUser) {
-        if (!req.user) return null
         return this.userService.getOne(req.user.id)
+    }
+
+    @Patch("/me")
+    @UseGuards(JwtAuthGuard)
+    async updateCurrentUser(@Request() req: RequestWithUser, @Body() updateUserDto: UpdateUserDto) {
+        return this.userService.update(req.user.id, updateUserDto)
     }
 
     @UseGuards(JwtAuthGuard, RolesGuard)
@@ -50,7 +55,8 @@ export class UserController {
         return this.userService.delete(id)
     }
 
-
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles(Role.Admin)
     @Patch(":id")
     async update(@Param("id") id: number, @Body() updateUserDto: UpdateUserDto) {
         return this.userService.update(id, updateUserDto)
