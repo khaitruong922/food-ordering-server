@@ -1,9 +1,11 @@
 import { Test, TestingModule } from "@nestjs/testing"
 import { when } from "jest-when"
 import RequestWithUser from "src/auth/request-with-user"
+import { Store } from "src/store/entities/store.entity"
 import { User } from "src/user/entities/user.entity"
 import { mockService } from "src/util/mocks/mock.service"
 import { CreateOrderDto } from "./dto/create-order.dto"
+import { OrderStatus } from "./entities/order.entity"
 import { OrderController } from "./order.controller"
 import { OrderService } from "./order.service"
 
@@ -15,6 +17,7 @@ describe('OrderController', () => {
     phoneNumber: '0908321238',
     note: 'A note',
     orderDetails: [],
+    store: new Store()
   }
 
   let mockOrderService: typeof mockService
@@ -72,7 +75,7 @@ describe('OrderController', () => {
   })
   it('should update an order', async () => {
     try {
-      const res = await controller.update(1, dto)
+      const res = await controller.update(1, { ...dto, status: OrderStatus.PENDING })
       expect(res).toEqual({ ...dto, id: 1 })
       expect(mockOrderService.update).toHaveBeenCalledWith(1, dto)
     } catch (e) {

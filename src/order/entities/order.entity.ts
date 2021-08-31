@@ -1,6 +1,7 @@
 import { Optional } from "@nestjs/common";
 import { BaseEntity } from "src/base/base.entity";
 import { OrderDetail } from "src/order-detail/entities/order-detail.entity";
+import { Store } from "src/store/entities/store.entity";
 import { User } from "src/user/entities/user.entity";
 import { Column, Entity, ManyToOne, OneToMany } from "typeorm";
 
@@ -51,4 +52,7 @@ export class Order extends BaseEntity {
 
     @ManyToOne(() => User, (user: User) => user.orders, { onDelete: 'SET NULL', nullable: true })
     user: User
+
+    @ManyToOne(() => Store, (store: Store) => store.orders, { onDelete: 'SET NULL', nullable: true, })
+    store: Store
 }

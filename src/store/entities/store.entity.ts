@@ -1,6 +1,7 @@
 import { BaseEntity } from "src/base/base.entity";
 import { Category } from "src/category/entities/category.entity";
 import { PublicFile } from "src/file/entities/public-file.entity";
+import { Order } from "src/order/entities/order.entity";
 import { SubMenu } from "src/sub-menu/entities/sub-menu.entity";
 import { Column, Entity, JoinColumn, ManyToMany, OneToMany, OneToOne } from "typeorm";
 
@@ -36,6 +37,8 @@ export class Store extends BaseEntity {
     @OneToMany(() => SubMenu, (subMenu: SubMenu) => subMenu.store)
     subMenus: SubMenu[]
 
+    @OneToMany(() => Order, (order: Order) => order.store)
+    orders: Order[]
 
     @ManyToMany(() => Category, (category: Category) => category.stores)
     categories: Category[]

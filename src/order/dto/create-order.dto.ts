@@ -2,6 +2,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
 import { IsArray, IsDate, IsEnum, IsOptional, IsPositive, IsString, Length, ValidateNested } from "class-validator";
 import { CreateOrderDetailDto } from "src/order-detail/dto/create-order-detail.dto";
+import { Store } from "src/store/entities/store.entity";
 import { User } from "src/user/entities/user.entity";
 import { OrderStatus } from "../entities/order.entity";
 
@@ -44,6 +45,10 @@ export class CreateOrderDto {
     @ApiProperty()
     @IsOptional()
     user?: User
+
+    @ApiProperty()
+    @IsOptional()
+    store?: Store
 
     @ApiProperty()
     @IsOptional()
