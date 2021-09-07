@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsEmail, IsOptional, IsString, Length } from "class-validator";
+import { IsEmail, IsNumberString, IsOptional, IsPhoneNumber, IsString, Length } from "class-validator";
 
 enum ValidationErrorMessage {
     InvalidEmailFormat = "Invalid email format!",
@@ -7,6 +7,7 @@ enum ValidationErrorMessage {
     InvalidPhoneLength = "Phone must be between 6 and 15 digts!",
     InvalidUsernameLength = "Username must be between 6 and 16 letters!",
     InvalidPasswordLength = "Password must be between 6 and 100 letters!",
+    InvalidPhoneFormat = "Phone number must contain only digits!"
 }
 
 export class CreateUserDto {
@@ -41,6 +42,10 @@ export class CreateUserDto {
 
     @ApiProperty()
     @IsString()
+    @IsNumberString({ no_symbols: true }, {
+        message: ValidationErrorMessage.InvalidPhoneFormat
+    })
+    
     @Length(6, 15, {
         message: ValidationErrorMessage.InvalidPhoneLength
     })
