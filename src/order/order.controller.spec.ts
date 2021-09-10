@@ -75,8 +75,8 @@ describe('OrderController', () => {
   })
   it('should update an order', async () => {
     try {
-      const res = await controller.update(1, { ...dto, status: OrderStatus.PENDING })
-      expect(res).toEqual({ ...dto, id: 1 })
+      const res = await controller.update(1, { ...dto })
+      expect(res).toEqual({ ...dto, id: 1})
       expect(mockOrderService.update).toHaveBeenCalledWith(1, dto)
     } catch (e) {
       fail(e)
